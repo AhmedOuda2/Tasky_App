@@ -18,18 +18,15 @@ class TaskController extends ChangeNotifier {
     required this.deleteTaskUseCase,
   });
 
-  // State Variables
   List<TaskEntity> _allTasks = [];
   bool _isLoading = false;
   String? _errorMessage;
 
-  // Search & Filter State
   String _searchQuery = '';
   String _selectedCategory = 'All';
   String _selectedPriority = 'All';
   String _selectedStatus = 'All';
 
-  // Getters
   List<TaskEntity> get allTasks => List.unmodifiable(_allTasks);
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
@@ -40,7 +37,6 @@ class TaskController extends ChangeNotifier {
   String get selectedPriority => _selectedPriority;
   String get selectedStatus => _selectedStatus;
 
-  // Summary Dashboard Counters
   int get totalCount => _allTasks.length;
   int get completedCount =>
       _allTasks.where((t) => t.status == 'Completed').length;
@@ -48,7 +44,6 @@ class TaskController extends ChangeNotifier {
       _allTasks.where((t) => t.status == 'In Progress').length;
   int get pendingCount => _allTasks.where((t) => t.status == 'Pending').length;
 
-  // Filtered Tasks List
   List<TaskEntity> get filteredTasks {
     return _allTasks.where((task) {
       final matchesSearch = task.title.toLowerCase().contains(
@@ -88,7 +83,6 @@ class TaskController extends ChangeNotifier {
     }
   }
 
-  // Add a task with Error Handling
   Future<bool> addTask(TaskEntity task) async {
     _errorMessage = null;
     try {
@@ -105,7 +99,6 @@ class TaskController extends ChangeNotifier {
     }
   }
 
-  // Update a task with Error Handling
   Future<bool> updateTask(TaskEntity task) async {
     _errorMessage = null;
     try {
@@ -122,7 +115,6 @@ class TaskController extends ChangeNotifier {
     }
   }
 
-  // Delete a task with Error Handling
   Future<bool> deleteTask(String id) async {
     _errorMessage = null;
     try {
@@ -139,20 +131,17 @@ class TaskController extends ChangeNotifier {
     }
   }
 
-  // Toggle Complete Status
   Future<void> toggleTaskStatus(TaskEntity task) async {
     final nextStatus = task.status == 'Completed' ? 'Pending' : 'Completed';
     final updated = task.copyWith(status: nextStatus);
     await updateTask(updated);
   }
 
-  // Search Query Setter
   void setSearchQuery(String query) {
     _searchQuery = query;
     notifyListeners();
   }
 
-  // Filter Setters
   void setFilterCategory(String category) {
     _selectedCategory = category;
     notifyListeners();

@@ -60,10 +60,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
               ),
             ),
             onPressed: () async {
-              Navigator.pop(ctx); // إغلاق صندوق الحوار
+              Navigator.pop(ctx);
               await widget.onDelete(_currentTask.id);
               if (mounted) {
-                Navigator.pop(context); // العودة للشاشة الرئيسية
+                Navigator.pop(context);
               }
             },
             child: const Text('Delete'),

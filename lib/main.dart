@@ -19,16 +19,13 @@ void main() async {
     sharedPreferences: sharedPreferences,
   );
 
-  // 2. Data Layer: Repository Implementation
   final taskRepository = TaskRepositoryImpl(localDataSource: localDataSource);
 
-  // 3. Domain Layer: Use Cases
   final getTasksUseCase = GetTasksUseCase(taskRepository);
   final addTaskUseCase = AddTaskUseCase(taskRepository);
   final updateTaskUseCase = UpdateTaskUseCase(taskRepository);
   final deleteTaskUseCase = DeleteTaskUseCase(taskRepository);
 
-  // 4. Presentation Layer: State Controller
   final taskController = TaskController(
     getTasksUseCase: getTasksUseCase,
     addTaskUseCase: addTaskUseCase,
@@ -36,7 +33,6 @@ void main() async {
     deleteTaskUseCase: deleteTaskUseCase,
   );
 
-  // Initial Fetching
   await taskController.fetchTasks();
 
   runApp(TaskyApp(controller: taskController));

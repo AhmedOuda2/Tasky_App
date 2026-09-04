@@ -24,7 +24,6 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
           .toList();
     }
 
-    // في حال كانت أول مرة يُفتح فيها التطبيق، نُحمّل البيانات الافتراضية
     final initialTasks = TaskModel.initialDataset;
     await cacheTasks(initialTasks);
     return initialTasks;
