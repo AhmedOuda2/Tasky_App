@@ -1,17 +1,29 @@
-# tasky_app
+# Tasky - Task Management App 📝
 
-A new Flutter project.
+A task management mobile application built with **Flutter** following **Clean Architecture**.
 
-## Getting Started
+## 📱 Features
+- **CRUD Operations**: Create, Read, Update, and Delete tasks.
+- **Search & Dynamic Filter**: Search by title and filter by Category and Status.
+- **Form Validation**: Validation for task title, description, and due date.
+- **Local Storage**: Persistent offline storage using `shared_preferences`.
+- **State Management**: Reactive UI with `Provider` and `ChangeNotifier`.
 
-This project is a starting point for a Flutter application.
+## 📦 Packages Used
+- `provider`: State Management.
+- `shared_preferences`: Local Data Persistence.
+- `intl`: Date formatting.
 
-A few resources to get you started if this is your first Flutter project:
+## 💾 Local Storage Strategy
+- Tasks are modeled via `TaskModel` with JSON serialization (`toMap` / `fromMap`).
+- Saved locally as a serialized JSON string in `shared_preferences`.
+- Restored automatically on app launch.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## 🔄 State Management
+- Managed through `TaskController` extending `ChangeNotifier`.
+- Centralized business logic separating UI from state changes.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 How to Run
+```bash
+flutter pub get
+flutter run
